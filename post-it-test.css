@@ -1,1 +1,19 @@
 /* CSS declarations go here */
+#submit-postit {
+  background: #F0E281;
+  height: 300px;
+  text-align: center;
+  font: 30px/300px Helvetica, Arial, sans-serif;
+}
+
+#select-column {
+	background: #F2F2E9;
+	height: 50px;
+	padding-top: 20px;
+}
+
+#elenas-idea {
+	font-size: 25px;
+	text-align: center;
+
+}

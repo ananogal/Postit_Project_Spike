@@ -1,14 +1,39 @@
 <head>
-  <title>post-it-test</title>
+  <title>Postit</title>
+  <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
-  <h1>Welcome to Post-it!</h1>
+  {{> document_ready}}
+	<header>
+	  <h1>Your Project</h1>
+	  <div id="submit-postit">
+		  <form class="new-postit">
+		    <input id="test" type="text" name="text" placeholder="Type to add new postits" />
+		  </form>
+	  </div>
+	</header>
 
-  {{> hello}}
+<div id="select-column">
+  <div id="elenas-idea"> {{> dynamic_columns }}</div>
+</div>
+
+  <div class="columns">
+    <ul>
+      {{#each postits}}
+        {{> postit}}
+      {{/each}}
+    </ul>
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="postit">
+  <li>{{text}}</li>
+</template>
+
+<template name="document_ready">	
+</template>
+
+<template name="dynamic_columns">  
+  {{postitCol}}
 </template>
