@@ -3,7 +3,7 @@ Postits = new Mongo.Collection("postits");
 Columns = new Mongo.Collection("columns")
 
 Columns.listcols = function () {
-   return _.pluck(this.find({}).fetch(), 'name');
+   return this.find({}).fetch();
 }
 Columns.listIds = function () {
    return _.pluck(this.find({}).fetch(), '_id');
@@ -15,7 +15,7 @@ Columns.position = function(number) {
 
 if (Meteor.isClient) {
 
-  Session.set('columnIndex', 0)
+  // Session.set('columnIndex', 0)
 
   // This code only runs on the client
   Meteor.subscribe('postits')
@@ -30,12 +30,15 @@ if (Meteor.isClient) {
 
   Template.dynamic_columns.helpers({
     postitCol: function() {
-      if (Session.get('columnIndex') === Columns.listcols().length) {
-        Session.set('columnIndex', 0)
-      }
-     return Columns.listcols()[Session.get('columnIndex')];
+     return Columns.listcols();
     }
   });
+
+  // Template.dynamic_columns.rendered=function (){  
+  //     alert('hello');
+  //     var activeElement = $('.item').first();
+  //     $(activeElement).addClass('active');
+  // };
 
   $(function () {
 
@@ -62,16 +65,19 @@ if (Meteor.isClient) {
 
     });
 
-    var setColumn = document.getElementById('select-column');
+    var setColumn = document.getElementById('carousel-example-generic');
     var hammercolumn = new Hammer(setColumn);
 
 
     hammercolumn.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
     hammercolumn.on("swipeleft", function(event) {
-      alert("Swiping LEFT");
-      Columns.position(1); 
-      // document.getElementById('elenas-idea').reload();  
+      alert('left');
+      $('.carousel').carousel('next');  
+    });
+    hammercolumn.on("swiperight", function(event) {
+      alert('right');
+      $('.carousel').carousel('prev');  
     });
 
   });
@@ -79,7 +85,14 @@ if (Meteor.isClient) {
   Template.document_ready.rendered = function() {
     var width = $(window).width(), height = $(window).height();
     if (width <= 400) {
-      alert('Im a mobile device!')
+      var activeElement = $('.item').first();
+      $(activeElement).addClass('active');
+      $('.carousel').carousel({
+        interval: false
+      })
+      $('.carousel').carousel('pause');
+
+      //alert('Im a mobile device!')
       $(".columns").hide();
     } else {
       // alert('Im a browser');

@@ -17,3 +17,19 @@
 	text-align: center;
 
 }
+
+.carousel {
+  background-color: blue;
+}
+
+.carousel-indicators {
+  bottom: -3px
+}
+
+h1 {
+  font-size: 25px;
+  margin-top: 11px;
+  padding-bottom: 22px;
+  text-align: center;
+  color:white;
+}

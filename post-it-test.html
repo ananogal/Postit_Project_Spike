@@ -14,9 +14,8 @@
 	  </div>
 	</header>
 
-<div id="select-column">
-  <div id="elenas-idea"> {{> dynamic_columns }}</div>
-</div>
+  {{> dynamic_columns }}
+
 
   <div class="columns">
     <ul>
@@ -35,5 +34,26 @@
 </template>
 
 <template name="dynamic_columns">  
-  {{postitCol}}
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      {{#each postitCol}}
+        <div class="item active">
+          <h1>{{name}}</h1>
+        </div>
+      {{/each}} 
+    </div>
+  </div>
+  {{>ana}}
+</template>
+
+<template name='ana'>
+{{data}}
 </template>
